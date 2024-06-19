@@ -31,18 +31,35 @@ function App() {
       { name: "Jun", count: 72 },
     ],
     customerAcquisition: [
-      { date: "2023-01-01", value: 100 },
-      { date: "2023-02-01", value: 120 },
-      { date: "2023-03-01", value: 150 },
-      { date: "2023-04-01", value: 180 },
-      { date: "2023-05-01", value: 200 },
-      { date: "2023-06-01", value: 220 },
+      {
+        id: "Desktop",
+        data: [
+          { x: "Jan", y: 43 },
+          { x: "Feb", y: 137 },
+          { x: "Mar", y: 61 },
+          { x: "Apr", y: 145 },
+          { x: "May", y: 26 },
+          { x: "Jun", y: 154 },
+        ],
+      },
+      {
+        id: "Mobile",
+        data: [
+          { x: "Jan", y: 60 },
+          { x: "Feb", y: 48 },
+          { x: "Mar", y: 177 },
+          { x: "Apr", y: 78 },
+          { x: "May", y: 96 },
+          { x: "Jun", y: 204 },
+        ],
+      },
     ],
-    topPerformingChannels: [
-      { label: "Google Ads", value: 40 },
-      { label: "Facebook Ads", value: 30 },
-      { label: "Email Marketing", value: 20 },
-      { label: "Referrals", value: 10 },
+    topPerformingChannels: 
+    [
+      { id: "Google Ads", value: 40 },
+      { id: "Facebook Ads", value: 30 },
+      { id: "Email Marketing", value: 20 },
+      { id: "Referrals", value: 10 },
     ],
     customerSatisfaction: [
       { date: "2023-01-01", value: 4 },
@@ -57,187 +74,6 @@ function App() {
   return (
   <>
   <Router>
-     {/* <div className="grid min-h-screen w-full grid-cols-[240px_1fr] overflow-hidden">
-      {/* <div className="flex flex-col border-r bg-gray-100/40 dark:bg-gray-800/40">
-        <div className="flex h-16 items-center px-6">
-          <Link to="#" className="flex items-center gap-2 font-semibold" >
-            <Package2Icon className="h-6 w-6" />
-            <span className="sr-only text-black">Acme Analytics</span>
-          </Link>
-        </div>
-         <nav className="flex-1 px-4 py-6">
-          <ul className="grid gap-2 text-sm font-medium">
-            <li>
-              <Link to="#" className="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50">
-                <HomeIcon className="h-4 w-4" />
-                Dashboard
-                </Link>
-            </li>
-            <li>
-              <Link
-                to="#"
-                className="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
-              >
-                <BarChartIcon className="h-4 w-4" />
-                Analytics
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="#"
-                className="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
-              >
-                <UsersIcon className="h-4 w-4" />
-                Customers
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="#"
-                className="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
-                
-              >
-                <ShoppingCartIcon className="h-4 w-4" />
-                Orders
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="#"
-                className="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
-                
-              >
-                <PackageIcon className="h-4 w-4" />
-                Products
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="#"
-                className="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
-                
-              >
-                <SettingsIcon className="h-4 w-4" />
-                Settings
-              </Link>
-            </li>
-          </ul>
-        </nav> 
-      </div> 
-      <div className="flex flex-col">
-        <header className="flex h-16 items-center border-b bg-gray-100/40 px-6 dark:bg-gray-800/40">
-          <h1 className="text-xl font-semibold text-black">Analytics Dashboard</h1>
-        </header>
-        
-      </div>
-       <div className="flex-1">
-        <header className="flex h-16 items-center border-b bg-[#0d2b4c] px-6 dark:bg-[#0d2b4c] md:hidden">
-          <h1 className="text-xl font-semibold text-black">Analytics Dashboard</h1>
-          <div className="ml-auto">
-            <Select value={timespan} onValueChange={handleTimespanChange}>
-              <SelectTrigger className="text-black">
-                <SelectValue placeholder="Select timespan" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="1 month">1 month</SelectItem>
-                <SelectItem value="3 months">3 months</SelectItem>
-                <SelectItem value="6 months">6 months</SelectItem>
-                <SelectItem value="1 year">1 year</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-        </header>
-       <main className="flex-1 overflow-y-auto p-6 bg-gray-50 dark:bg-gray-900">
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 justify-center">
-            <Card className="bg-[#0d2b4c] text-white">
-              <CardHeader className="flex items-center justify-between pb-4">
-                <CardTitle className="text-lg font-semibold">Total Revenue</CardTitle>
-                <DollarSignIcon className="h-5 w-5 text-gray-400" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-3xl font-bold">${data.totalRevenue.toLocaleString()}</div>
-                <p className="text-sm text-gray-400">
-                  +{data.revenueChange}% from last {timespan}
-                </p>
-              </CardContent>
-            </Card>
-            <Card className="bg-[#0d2b4c] text-white">
-              <CardHeader className="flex items-center justify-between pb-4">
-                <CardTitle className="text-lg font-semibold">New Customers</CardTitle>
-                <UsersIcon className="h-5 w-5 text-gray-400" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-3xl font-bold">+{data.newCustomers.toLocaleString()}</div>
-                <p className="text-sm text-gray-400">
-                  +{data.customersChange}% from last {timespan}
-                </p>
-              </CardContent>
-            </Card>
-            <Card className="bg-[#0d2b4c] text-white">
-              <CardHeader className="flex items-center justify-between pb-4">
-                <CardTitle className="text-lg font-semibold">Conversion Rate</CardTitle>
-                <PercentIcon className="h-5 w-5 text-gray-400" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-3xl font-bold">{data.conversionRate}%</div>
-                <p className="text-sm text-gray-400">
-                  +{data.conversionRateChange}% from last {timespan}
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-          <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-2 justify-center">
-            <Card className="bg-[#0d2b4c] text-white">
-              <CardHeader className="flex items-center justify-between pb-4">
-                <CardTitle className="text-lg font-semibold">Sales by Product</CardTitle>
-                <BarChartIcon className="h-5 w-5 text-gray-400" />
-              </CardHeader>
-              <CardContent>
-                <div className="max-w-[800px] mx-auto">
-                  <BarChart data={data.salesByProduct} className="aspect-[16/9] bg-[#0d2b4c]" />
-                </div>
-              </CardContent>
-            </Card>
-            <Card className="bg-[#0d2b4c] text-white">
-              <CardHeader className="flex items-center justify-between pb-4">
-                <CardTitle className="text-lg font-semibold">Customer Acquisition</CardTitle>
-                <LineChartIcon className="h-5 w-5 text-gray-400" />
-              </CardHeader>
-              <CardContent>
-                <div className="max-w-[800px] mx-auto">
-                  <LineChart data={data.customerAcquisition} className="aspect-[16/9] bg-[#0d2b4c]" />
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-          <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-2 justify-center">
-            <Card className="bg-[#0d2b4c] text-white">
-              <CardHeader className="flex items-center justify-between pb-4">
-                <CardTitle className="text-lg font-semibold">Top Performing Channels</CardTitle>
-                <PieChartIcon className="h-5 w-5 text-gray-400" />
-              </CardHeader>
-              <CardContent>
-                <div className="max-w-[400px] mx-auto">
-                  <PieChart data={data.topPerformingChannels} className="aspect-square bg-[#0d2b4c]" />
-                </div>
-              </CardContent>
-            </Card>
-            <Card className="bg-[#0d2b4c] text-white">
-              <CardHeader className="flex items-center justify-between pb-4">
-                <CardTitle className="text-lg font-semibold">Customer Satisfaction</CardTitle>
-                <StarIcon className="h-5 w-5 text-gray-400" />
-              </CardHeader>
-              <CardContent>
-                <div className="max-w-[800px] mx-auto">
-                  <LineChart data={data.customerSatisfaction} className="aspect-[16/9] bg-[#0d2b4c]" />
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </main>
-
-      </div>
-      </div> */}
     <div className="grid min-h-screen w-full grid-cols-[240px_1fr] overflow-hidden">
       <div className="flex flex-col border-r bg-gray-100/40 dark:bg-gray-800/40">
         <div className="flex h-16 items-center px-6">
@@ -478,92 +314,26 @@ function BarChart({ data, ...props }: { data: any; [key: string]: any }) {
 }
 
 
-// function BarChart(props:any,data:any) {
-//   return (
-//     <div {...props}>
-//       <ResponsiveBar
-//         data={[
-//           { name: "Jan", count: 111 },
-//           { name: "Feb", count: 157 },
-//           { name: "Mar", count: 129 },
-//           { name: "Apr", count: 150 },
-//           { name: "May", count: 119 },
-//           { name: "Jun", count: 72 },
-//         ]}
-//         keys={["count"]}
-//         indexBy="name"
-//         margin={{ top: 0, right: 0, bottom: 40, left: 40 }}
-//         padding={0.3}
-//         colors={["#2563eb"]}
-//         axisBottom={{
-//           tickSize: 0,
-//           tickPadding: 16,
-//         }}
-//         axisLeft={{
-//           tickSize: 0,
-//           tickValues: 4,
-//           tickPadding: 16,
-//         }}
-//         gridYValues={4}
-//         theme={{
-//           tooltip: {
-//             chip: {
-//               borderRadius: "9999px",
-//             },
-//             container: {
-//               fontSize: "12px",
-//               textTransform: "capitalize",
-//               borderRadius: "6px",
-//             },
-//           },
-//           grid: {
-//             line: {
-//               stroke: "#f3f4f6",
-//             },
-//           },
-//         }}
-//         tooltipLabel={({ id }:any) => `${id}`}
-//         enableLabel={false}
-//         role="application"
-//         ariaLabel="A bar chart showing data"
-//       />
-//     </div>
-//   )
-// }
 
+function LineChart({ data, ...props }: { data: any; [key: string]: any }) {
+  // Check if data is provided and is an array
+  if (!Array.isArray(data)) {
+    console.error("Data should be an array of series objects.");
+    return null;
+  }
 
+  // Check if each series has an id and data array
+  for (const series of data) {
+    if (typeof series.id === "undefined" || !Array.isArray(series.data)) {
+      console.error("Each series should have an id and a data array.");
+      return null;
+    }
+  }
 
-
-
-
-function LineChart(props:any) {
   return (
     <div {...props}>
       <ResponsiveLine
-        data={[
-          {
-            id: "Desktop",
-            data: [
-              { x: "Jan", y: 43 },
-              { x: "Feb", y: 137 },
-              { x: "Mar", y: 61 },
-              { x: "Apr", y: 145 },
-              { x: "May", y: 26 },
-              { x: "Jun", y: 154 },
-            ],
-          },
-          {
-            id: "Mobile",
-            data: [
-              { x: "Jan", y: 60 },
-              { x: "Feb", y: 48 },
-              { x: "Mar", y: 177 },
-              { x: "Apr", y: 78 },
-              { x: "May", y: 96 },
-              { x: "Jun", y: 204 },
-            ],
-          },
-        ]}
+        data={data}
         margin={{ top: 10, right: 10, bottom: 40, left: 40 }}
         xScale={{
           type: "point",
@@ -606,23 +376,67 @@ function LineChart(props:any) {
         role="application"
       />
     </div>
-  )
+  );
 }
 
 
+// function LineChart({ data, ...props }: { data: any; [key: string]: any }) {
+//   return (
+//     <div {...props}>
+//       <ResponsiveLine
+//         data={data}
+//         margin={{ top: 10, right: 10, bottom: 40, left: 40 }}
+//         xScale={{
+//           type: "point",
+//         }}
+//         yScale={{
+//           type: "linear",
+//         }}
+//         axisTop={null}
+//         axisRight={null}
+//         axisBottom={{
+//           tickSize: 0,
+//           tickPadding: 16,
+//         }}
+//         axisLeft={{
+//           tickSize: 0,
+//           tickValues: 5,
+//           tickPadding: 16,
+//         }}
+//         colors={["#2563eb", "#e11d48"]}
+//         pointSize={6}
+//         useMesh={true}
+//         gridYValues={6}
+//         theme={{
+//           tooltip: {
+//             chip: {
+//               borderRadius: "9999px",
+//             },
+//             container: {
+//               fontSize: "12px",
+//               textTransform: "capitalize",
+//               borderRadius: "6px",
+//             },
+//           },
+//           grid: {
+//             line: {
+//               stroke: "#f3f4f6",
+//             },
+//           },
+//         }}
+//         role="application"
+//       />
+//     </div>
+//   )
+// }
 
-function PieChart(props:any) {
+
+
+function PieChart({ data, ...props }: { data: any; [key: string]: any }) {
   return (
     <div {...props}>
       <ResponsivePie
-        data={[
-          { id: "Jan", value: 111 },
-          { id: "Feb", value: 157 },
-          { id: "Mar", value: 129 },
-          { id: "Apr", value: 150 },
-          { id: "May", value: 119 },
-          { id: "Jun", value: 72 },
-        ]}
+        data={data}
         sortByValue
         margin={{ top: 10, right: 10, bottom: 10, left: 10 }}
         cornerRadius={0}
