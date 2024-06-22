@@ -7,6 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model orders {
   Invoice_ID              String?
   Branch                  String?
@@ -15,15 +16,15 @@ model orders {
   Gender                  String?
   Product_line            String?
   Unit_price              Float?
-  Quantity                BigInt?
-  Tax_5_                  Float?  @map("Tax_5%")
+  Quantity                Float?
+  Tax_5_                  Float?    @map("Tax_5%")
   Total                   Float?
-  Date                    String?
   Time                    String?
   Payment                 String?
   cogs                    Float?
   gross_margin_percentage Float?
   gross_income            Float?
   Rating                  Float?
-  id                      Int     @id @default(autoincrement())
+  Date_new                DateTime? @db.Timestamp(6)
+  id                      Int       @id @default(autoincrement())
 }

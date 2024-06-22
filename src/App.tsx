@@ -2,64 +2,52 @@ import { Link } from "react-router-dom";
 import { BrowserRouter as Router} from 'react-router-dom';
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem,SelectGroup,SelectLabel } from "@/components/ui/select"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { ResponsiveBar } from "@nivo/bar"
 import { ResponsiveLine } from "@nivo/line"
 import { ResponsivePie } from "@nivo/pie"
+import axios from "axios";
 
 function App() {
-  const [timespan, setTimespan] = useState("6 months")
-  const handleTimespanChange = (value:any) => {
-    setTimespan(value)
-  }
-
-
-  const data = {
+  const [timespan, setTimespan] = useState("7")
+  // const handleTimespanChange = (value:any) => {
+  //   setTimespan(value)
+  // }
+  const [data,setData] = useState({
     totalRevenue: 125234,
     revenueChange: 15,
-    newCustomers: 1234,
+    totalProfit: 1234,
     customersChange: 20,
-    conversionRate: 12.5,
+    totalOrders: 12.5,
     conversionRateChange: 2,
-    salesByProduct: [
-      { name: "Jan", count: 11 },
-      { name: "Feb", count: 157 },
-      { name: "Mar", count: 129 },
-      { name: "Apr", count: 150 },
-      { name: "May", count: 119 },
-      { name: "Jun", count: 72 },
+    ProductData: [ 
+      {name: 'Fashion accessories', count: 2657.739},
+      {name: 'Health and beauty', count: 6175.113},
+      {name: 'Electronic accessories', count: 4765.267500000001},
+      {name: 'Sports and travel', count: 1798.062},
+      {name: 'Food and beverages', count: 3843.147},
+      {name: 'Home and lifestyle', count: 2116.1385}
     ],
-    customerAcquisition: [
+    DateData: [
       {
         id: "Desktop",
         data: [
-          { x: "Jan", y: 43 },
-          { x: "Feb", y: 137 },
-          { x: "Mar", y: 61 },
-          { x: "Apr", y: 145 },
-          { x: "May", y: 26 },
-          { x: "Jun", y: 154 },
+          {x: '2019-03-30T00:00:00.000Z', y: 4487.0595},
+{x: '2019-03-26T00:00:00.000Z', y: 1962.513},
+{x: '2019-03-27T00:00:00.000Z', y: 2902.8195},
+{x: '2019-03-25T00:00:00.000Z', y: 2272.9665},
+{x: '2019-03-29T00:00:00.000Z', y: 4023.243},
+{x: '2019-03-24T00:00:00.000Z', y: 3477.4635},
+{x: '2019-03-28T00:00:00.000Z', y: 2229.402}
         ],
-      },
-      {
-        id: "Mobile",
-        data: [
-          { x: "Jan", y: 60 },
-          { x: "Feb", y: 48 },
-          { x: "Mar", y: 177 },
-          { x: "Apr", y: 78 },
-          { x: "May", y: 96 },
-          { x: "Jun", y: 204 },
-        ],
-      },
+      }
     ],
-    topPerformingChannels: 
+    CityData: 
     [
-      { id: "Google Ads", value: 40 },
-      { id: "Facebook Ads", value: 30 },
-      { id: "Email Marketing", value: 20 },
-      { id: "Referrals", value: 10 },
+      {id: 'Yangon', value: 7200.868499999999},
+      {id: 'Naypyitaw', value: 7091.574000000001}, 
+      {id: 'Mandalay', value: 7063.024500000001}
     ],
     customerSatisfaction: [
       { date: "2023-01-01", value: 4 },
@@ -69,8 +57,32 @@ function App() {
       { date: "2023-05-01", value: 4.8 },
       { date: "2023-06-01", value: 5 },
     ],
-  }
-  
+  })
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       // Make GET request using Axios
+  //       console.log("pull")
+  //       const response = await axios.get('http://127.0.0.1:8787/7'); // Replace with your actual API endpoint
+  //       setData(response.data); // Set response data to state variable
+  //       console.log("pull")
+  //       // console.log(response.data);
+  //       console.log(data)
+  //     } catch (error) {
+  //       console.error('Error fetching data:', error);
+  //     }
+  //   };
+
+  //   fetchData();
+    
+  // }, []);
+  useEffect(() => {
+axios.get(`https://backend.gauravmasand447.workers.dev/${timespan}`)
+        .then(response => {
+            setData(response.data);
+            console.log(timespan);
+        })
+}, [timespan])
   return (
   <>
   <Router>
@@ -157,10 +169,10 @@ function App() {
               <SelectContent>
                 <SelectGroup>
                   <SelectLabel>Timespan</SelectLabel>
-                  <SelectItem value="last_30_days">Last 30 Days</SelectItem>
-                  <SelectItem value="last_90_days">Last 90 Days</SelectItem>
-                  <SelectItem value="last_year">Last Year</SelectItem>
-                  <SelectItem value="custom">Custom</SelectItem>
+                  <SelectItem value="7">Last Week</SelectItem>
+                  <SelectItem value="14">Last 2 Weeks</SelectItem>
+                  <SelectItem value="30">Last Month</SelectItem>
+                  <SelectItem value="100">Full</SelectItem>
                 </SelectGroup>
               </SelectContent>
             </Select>
@@ -172,35 +184,35 @@ function App() {
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             <Card>
               <CardHeader className="flex items-center justify-between pb-4">
-                <CardTitle className="text-lg font-semibold">Total Revenue</CardTitle>
+                <CardTitle className="text-lg font-semibold">Revenue</CardTitle>
                 <DollarSignIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
               </CardHeader>
               <CardContent>
                 <div className="text-3xl font-bold">${data.totalRevenue.toLocaleString()}</div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">+{data.revenueChange}% from last month</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">+15% from last month</p>
               </CardContent>
             </Card>
 
             <Card>
               <CardHeader className="flex items-center justify-between pb-4">
-                <CardTitle className="text-lg font-semibold">New Customers</CardTitle>
+                <CardTitle className="text-lg font-semibold">Profit</CardTitle>
                 <UsersIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
               </CardHeader>
               <CardContent>
-                <div className="text-3xl font-bold">+{data.newCustomers.toLocaleString()}</div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">+{data.customersChange}% from last month</p>
+                <div className="text-3xl font-bold">${data.totalProfit.toLocaleString()}</div>
+                <p className="text-sm text-gray-500 dark:text-gray-400">+20% from last month</p>
               </CardContent>
             </Card>
 
             <Card>
               <CardHeader className="flex items-center justify-between pb-4">
-                <CardTitle className="text-lg font-semibold">Conversion Rate</CardTitle>
-                <PercentIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+                <CardTitle className="text-lg font-semibold">Orders</CardTitle>
+                <ShoppingCartIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
               </CardHeader>
               <CardContent>
-                <div className="text-3xl font-bold">{data.conversionRate}%</div>
+                <div className="text-3xl font-bold">{data.totalOrders}</div>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
-                  +{data.conversionRateChange}% from last month
+                  +16% from last month
                 </p>
               </CardContent>
             </Card>
@@ -212,21 +224,21 @@ function App() {
 
             <Card>
               <CardHeader className="flex items-center justify-between pb-4">
-                <CardTitle className="text-lg font-semibold">Sales by Product</CardTitle>
+                <CardTitle className="text-lg font-semibold">Revenue by Product</CardTitle>
                 <BarChartIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
               </CardHeader>
               <CardContent>
-                <BarChart data={data.salesByProduct} className="aspect-[16/9]" />
+                <BarChart data={data.ProductData} className="aspect-[16/9]" />
               </CardContent>
             </Card>
 
             <Card>
               <CardHeader className="flex items-center justify-between pb-4">
-                <CardTitle className="text-lg font-semibold">Customer Acquisition</CardTitle>
+                <CardTitle className="text-lg font-semibold">Revenue by Date</CardTitle>
                 <LineChartIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
               </CardHeader>
               <CardContent>
-                <LineChart data={data.customerAcquisition} className="aspect-[16/9]" />
+                <LineChart data={data.DateData} className="aspect-[16/9]" />
               </CardContent>
             </Card>
 
@@ -237,16 +249,16 @@ function App() {
           <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-2">
             <Card>
               <CardHeader className="flex items-center justify-between pb-4">
-                <CardTitle className="text-lg font-semibold">Top Performing Channels</CardTitle>
+                <CardTitle className="text-lg font-semibold">Top Performing Cities</CardTitle>
                 <PieChartIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
               </CardHeader>
               <CardContent>
-                <PieChart data={data.topPerformingChannels} className="aspect-square" />
+                <PieChart data={data.CityData} className="aspect-square" />
               </CardContent>
             </Card>
 
 
-            <Card>
+            {/* <Card>
               <CardHeader className="flex items-center justify-between pb-4">
                 <CardTitle className="text-lg font-semibold">Customer Satisfaction</CardTitle>
                 <StarIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
@@ -254,7 +266,7 @@ function App() {
               <CardContent>
                 <LineChart data={data.customerSatisfaction} className="aspect-[16/9]" />
               </CardContent>
-            </Card>
+            </Card> */}
           </div>
         </main>
       </div>
@@ -274,12 +286,13 @@ function BarChart({ data, ...props }: { data: any; [key: string]: any }) {
         data={data}
         keys={["count"]}
         indexBy="name"
-        margin={{ top: 0, right: 0, bottom: 40, left: 40 }}
+        margin={{ top: 0, right: 0, bottom: 60, left: 70 }}
         padding={0.3}
-        colors={["#2563eb"]}
+        colors={["#8b5cf6"]}
         axisBottom={{
           tickSize: 0,
-          tickPadding: 16,
+          tickPadding: 5,
+          tickRotation: -20
         }}
         axisLeft={{
           tickSize: 0,
@@ -346,6 +359,7 @@ function LineChart({ data, ...props }: { data: any; [key: string]: any }) {
         axisBottom={{
           tickSize: 0,
           tickPadding: 16,
+          tickRotation: -20
         }}
         axisLeft={{
           tickSize: 0,
@@ -447,7 +461,7 @@ function PieChart({ data, ...props }: { data: any; [key: string]: any }) {
         arcLabel={(d) => `${d.id}`}
         arcLabelsTextColor={"#ffffff"}
         arcLabelsRadiusOffset={0.65}
-        colors={["#2563eb"]}
+        colors={["#2563eb", "#e11d48", "#fbbf24", "#10b981", "#8b5cf6"]}
         theme={{
           labels: {
             text: {
