@@ -15,39 +15,39 @@ function App() {
   //   setTimespan(value)
   // }
   const [data,setData] = useState({
-    totalRevenue: 125234,
-    revenueChange: 15,
-    totalProfit: 1234,
-    customersChange: 20,
-    totalOrders: 12.5,
-    conversionRateChange: 2,
+    totalRevenue: 0,
+    revenueChange: 0,
+    totalProfit: 0,
+    customersChange: 0,
+    totalOrders: 0,
+    conversionRateChange: 0,
     ProductData: [ 
-      {name: 'Fashion accessories', count: 2657.739},
-      {name: 'Health and beauty', count: 6175.113},
-      {name: 'Electronic accessories', count: 4765.267500000001},
-      {name: 'Sports and travel', count: 1798.062},
-      {name: 'Food and beverages', count: 3843.147},
-      {name: 'Home and lifestyle', count: 2116.1385}
+      {name: 'Fashion accessories', count: 0},
+      {name: 'Health and beauty', count: 0},
+      {name: 'Electronic accessories', count: 0},
+      {name: 'Sports and travel', count: 0},
+      {name: 'Food and beverages', count: 0},
+      {name: 'Home and lifestyle', count: 0}
     ],
     DateData: [
       {
         id: "Desktop",
         data: [
-          {x: '2019-03-30T00:00:00.000Z', y: 4487.0595},
-{x: '2019-03-26T00:00:00.000Z', y: 1962.513},
-{x: '2019-03-27T00:00:00.000Z', y: 2902.8195},
-{x: '2019-03-25T00:00:00.000Z', y: 2272.9665},
-{x: '2019-03-29T00:00:00.000Z', y: 4023.243},
-{x: '2019-03-24T00:00:00.000Z', y: 3477.4635},
-{x: '2019-03-28T00:00:00.000Z', y: 2229.402}
+          {x: '1', y: 0},
+{x: '1', y: 0},
+{x: '2', y: 0},
+{x: '3', y: 0},
+{x: '4', y: 0},
+{x: '5', y: 0},
+{x: '6', y: 0}
         ],
       }
     ],
     CityData: 
     [
-      {id: 'Yangon', value: 7200.868499999999},
-      {id: 'Naypyitaw', value: 7091.574000000001}, 
-      {id: 'Mandalay', value: 7063.024500000001}
+      {id: 'Yangon', value: 1},
+      {id: 'Naypyitaw', value: 1}, 
+      {id: 'Mandalay', value: 1}
     ],
     customerSatisfaction: [
       { date: "2023-01-01", value: 4 },
